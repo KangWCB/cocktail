@@ -1,10 +1,7 @@
 package com.example.toycocktail.cocktail.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,13 +17,14 @@ public class Liquid {
 
     private String name;
 
-    private int alcoholLevel; // enum?
+    private float alcoholLevel;
 
     private String description;
 
     private String company;
 
-    private Long price;
+    private int price;
 
-    private String type; // enum?
+    @Enumerated(EnumType.STRING)
+    private Category category;
 }

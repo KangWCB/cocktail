@@ -15,7 +15,7 @@ import static jakarta.persistence.FetchType.LAZY;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
-public class Like {
+public class Likes {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
