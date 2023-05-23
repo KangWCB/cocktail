@@ -28,7 +28,7 @@ public class Cocktail {
 
     private String description;
 
-    private String type; // enum?
+    private CocktailType type; // enum?
 
 
 }

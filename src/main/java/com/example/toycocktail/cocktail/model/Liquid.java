@@ -28,5 +28,5 @@ public class Liquid {
 
     private Long price;
 
-    private String type; // enum?
+    private Category category; // enum?
 }
