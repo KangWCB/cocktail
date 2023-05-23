@@ -1,18 +1,13 @@
 package com.example.toycocktail.member.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import com.example.toycocktail.member.constant.Role;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@NoArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Getter
 public class Member {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +21,6 @@ public class Member {
 
     private String intro;
 
-    private String role; // enum???
+    @Enumerated(EnumType.STRING)
+    private Role role; // enum???
 }
