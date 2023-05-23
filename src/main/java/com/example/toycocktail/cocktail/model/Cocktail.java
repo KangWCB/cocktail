@@ -28,7 +28,8 @@ public class Cocktail {
 
     private String description;
 
-    private CocktailType type; // enum?
+    @Enumerated(EnumType.STRING)
+    private CocktailType type;
 
 
 }
