@@ -26,5 +26,5 @@ public class Member {
 
     private String intro;
 
-    private String role; // enum?
+    private String role; // enum??
 }
