@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <form th:action="@{/members/login_proc}" method="post">
+    <div class="form-group">
+      <input type="text" name="email" id="email" placeholder="이메일" required="true" autofocus="true"/>
+    </div>
+    <div class="form-group">
+      <input type="password" name="password" id="password" placeholder="패스워드" required="true"/>
+    </div>
+
+    <input type="submit" value="로그인"/>
+  </form>
+  <div th:if="${param.error}">
+    <span th:text=""></span>
+  </div>
+  <a href="/members/signup">회원 가입</a>
+
+</head>
+<body>
+
+</body>
+</html>
