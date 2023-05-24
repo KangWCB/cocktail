@@ -7,7 +7,7 @@ spring:
     password: 1234
   jpa:
     hibernate:
-      ddl-auto: create # 한번 실행 이후 무조건 update로 수정
+      ddl-auto: update # 한번 실행 이후 무조건 update로 수정
 
 decorator:
   datasource:
