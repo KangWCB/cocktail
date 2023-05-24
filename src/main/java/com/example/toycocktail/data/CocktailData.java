@@ -14,7 +14,7 @@ import java.util.List;
 public class CocktailData {
     @CsvBindByName(column = "strDrink")
     private String name;
-    //@CsvBindByName(column = "strInstructions")
+    @CsvBindByName(column = "strInstructions")
     private String description;
     @CsvBindByName(column = "strAlcoholic")
     private String alcoholic; // Alcohol, non

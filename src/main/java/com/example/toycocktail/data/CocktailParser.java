@@ -67,7 +67,7 @@ public class CocktailParser {
                     .orElseGet(() -> cocktailRepository.save(
                             Cocktail.builder()
                                     .name(cocktailData.getName())
-//                                    .description(cocktailData.getDescription())
+                                    .description(cocktailData.getDescription())
                                     .alcoholic(cocktailData.getAlcoholic())
                                     .category(cocktailData.getCategory())
                                     .imgUrl(cocktailData.getImgUrl())
