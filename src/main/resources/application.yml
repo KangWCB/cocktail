@@ -13,3 +13,12 @@ decorator:
   datasource:
     p6spy:
       enable-logging: true #운영환경에서는 false
+---
+spring:
+  config:
+    activate:
+      on-profile: init
+
+  jpa:
+    hibernate:
+      ddl-auto: create
