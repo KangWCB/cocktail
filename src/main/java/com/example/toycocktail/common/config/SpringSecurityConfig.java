@@ -45,7 +45,6 @@ public class SpringSecurityConfig {
                                 .usernameParameter("email")
                                 .passwordParameter("password")
                                 .loginProcessingUrl("/members/login_proc")
-//                        .failureUrl("/members/login?result=false")
                                 .successHandler(new AuthenticationSuccessHandler() {
                                     @Override
                                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {

@@ -25,6 +25,5 @@ public class Liquid {
 
     private int price;
 
-    @Enumerated
     private String category; // enum?
 }
