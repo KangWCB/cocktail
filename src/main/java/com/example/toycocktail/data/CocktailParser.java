@@ -8,37 +8,48 @@ import com.example.toycocktail.cocktail.repository.InnerLiquidRepository;
 import com.example.toycocktail.cocktail.repository.LiquidRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBeanBuilder;
-import com.opencsv.exceptions.CsvException;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MultiValuedMap;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-import static com.mysema.commons.lang.Assert.assertThat;
 
 
 @Slf4j
 @RequiredArgsConstructor
 @Component
+@ConditionalOnResource(resources = "/data.csv")
+@Profile("init")
 public class CocktailParser {
 
     private final CocktailRepository cocktailRepository;
     private final LiquidRepository liquidRepository;
     private final InnerLiquidRepository innerLiquidRepository;
+    private final String resource = "/data.csv";
 
-    @Transactional
-    public void read() throws IOException, CsvException {
+    @PostConstruct
+    public void initData(){
+        try{
+            read();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void read() throws Exception {
         InputStream in = getClass().getResourceAsStream("/data.csv");
         InputStreamReader reader = new InputStreamReader(in, StandardCharsets.UTF_8);
 
@@ -95,18 +106,7 @@ public class CocktailParser {
                     );
                 }
             }
-
-
         }
-
-
-
-
-        // idx 9 ~ 23 ingredient
-
-
-
-
-
     }
+
 }
