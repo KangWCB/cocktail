@@ -2,16 +2,14 @@ package com.example.toycocktail.cocktail.model;
 
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@Builder
 @Getter
 public class InnerLiquid {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +23,6 @@ public class InnerLiquid {
     @JoinColumn(name = "cocktail_id")
     private Cocktail cocktail;
 
-    private int amount;
+    private String amount;
 
 }

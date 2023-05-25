@@ -2,14 +2,12 @@ package com.example.toycocktail.cocktail.model;
 
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@Builder
 @Getter
 public class Liquid {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +15,7 @@ public class Liquid {
 
     private String name;
 
-    private float alcoholLevel; // enum?
+    private float alcoholLevel;
 
     private String description;
 
@@ -25,5 +23,6 @@ public class Liquid {
 
     private int price;
 
-    private String category; // enum?
+    @Enumerated(EnumType.STRING)
+    private Category category;
 }

@@ -50,6 +50,15 @@ dependencies {
 
 	// email
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	// lombok setting
+	annotationProcessor('org.projectlombok:lombok')
+	testAnnotationProcessor('org.projectlombok:lombok')
+
+
+	// opencsv
+	implementation 'com.opencsv:opencsv:5.5'
+
 }
 
 tasks.named('test') {
@@ -72,4 +81,4 @@ sourceSets {
 // gradle clean 시에 QClass 디렉토리 삭제
 clean {
 	delete file(generated)
-}
+
