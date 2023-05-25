@@ -31,7 +31,7 @@ public class CocktailRepositoryImpl implements CocktailRepositoryCustom{
         List<Cocktail> result = queryFactory.select(qCocktail)
                 .from(qCocktail)
                 .where(containName(searchCond.getName()),
-                        isAlcoholic(searchCond.isAlcoholic()))
+                        isAlcoholic(searchCond.getIsAlcoholic()))
                 .orderBy(qCocktail.views.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -45,8 +45,11 @@ public class CocktailRepositoryImpl implements CocktailRepositoryCustom{
         return qCocktail.name.contains(name);
     }
 
-    private BooleanBuilder isAlcoholic(boolean isAlcoholic) {
+    private BooleanBuilder isAlcoholic(Boolean isAlcoholic) {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
+        if (isAlcoholic == null){
+            return null;
+        }
         if (isAlcoholic == true)
             booleanBuilder.or(qCocktail.alcoholic.eq(Alcoholic.BASIC));
         else

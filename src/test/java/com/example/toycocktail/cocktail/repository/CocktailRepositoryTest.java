@@ -64,4 +64,23 @@ class CocktailRepositoryTest {
 
         assertThat(content.size()).isEqualTo(5);
     }
+
+    @Test
+    void findByAlcoholicBy10(){
+        SearchCond sc = SearchCond.builder()
+                .isAlcoholic(true)
+                .build();
+
+        PageRequest pageRequest = PageRequest.of(0,10);
+
+        Page<Cocktail> findCocktails = repository.findBySearchCond(sc, pageRequest);
+
+        List<Cocktail> content = findCocktails.getContent();
+//        content.stream().forEach(v -> log.info("result = {}", v.getName()));
+
+        content.stream().forEach(v -> {
+            assertThat(v.getAlcoholic()).isEqualTo(Alcoholic.BASIC);
+        });
+        assertThat(content.size()).isEqualTo(10);
+    }
 }
