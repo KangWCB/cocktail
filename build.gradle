@@ -24,7 +24,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.7.1' // p6spy
+	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0' // p6spy
 	implementation 'org.postgresql:postgresql:42.5.0'
 
 	//querydsl 설정 추가
@@ -36,6 +36,10 @@ dependencies {
 	// lombok setting
 	annotationProcessor('org.projectlombok:lombok')
 	testAnnotationProcessor('org.projectlombok:lombok')
+
+
+	// opencsv
+	implementation 'com.opencsv:opencsv:5.5'
 }
 
 tasks.named('test') {

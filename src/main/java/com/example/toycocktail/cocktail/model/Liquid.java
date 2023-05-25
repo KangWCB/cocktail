@@ -2,14 +2,12 @@ package com.example.toycocktail.cocktail.model;
 
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@Builder
 @Getter
 public class Liquid {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

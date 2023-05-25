@@ -4,6 +4,7 @@ package com.example.toycocktail.cocktail.model;
 import com.example.toycocktail.member.model.Member;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.Length;
 
 import static jakarta.persistence.FetchType.LAZY;
 
@@ -20,6 +21,7 @@ public class Cocktail {
 
     private String name;
 
+    @Column(length = 1000)
     private String description;
 
     private String alcoholic; // Alcohol, non
