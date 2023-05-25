@@ -1,5 +1,6 @@
 package com.example.toycocktail.data;
 
+import com.example.toycocktail.cocktail.model.Alcoholic;
 import com.example.toycocktail.cocktail.model.Cocktail;
 import com.example.toycocktail.cocktail.model.InnerLiquid;
 import com.example.toycocktail.cocktail.model.Liquid;
@@ -68,6 +69,7 @@ public class CocktailParser {
             HashMap<String,String> liquidMap = new HashMap<>();
             liquids = cocktailData.getLiquids();
             amounts = cocktailData.getAmounts();
+            Alcoholic alcoholic = Alcoholic.valueOfLabel(cocktailData.getAlcoholic());
             for (int i=0;i<16;i++) // 컬럼 인덱스 9 ~ 15 ingredient
             {
                 String liquidName = liquids.get("strIngredient"+i).toString().replaceAll("[\\[\\]]","");
@@ -80,7 +82,7 @@ public class CocktailParser {
                     .orElseGet(() -> cocktailRepository.save(
                             Cocktail.createForInit(cocktailData.getName(),
                                     cocktailData.getDescription(),
-                                    cocktailData.getAlcoholic(),
+                                    alcoholic,
                                     cocktailData.getCategory(),
                                     cocktailData.getImgUrl(),
                                     cocktailData.getGlass())

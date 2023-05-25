@@ -24,7 +24,8 @@ public class Cocktail {
     @Column(length = 1000)
     private String description;
 
-    private String alcoholic; // Alcohol, non
+    @Enumerated(EnumType.STRING)
+    private Alcoholic alcoholic; // Alcohol, non
 
     private String category;
 
@@ -39,7 +40,7 @@ public class Cocktail {
     private Member member;
 
     // 초기데이터
-    public static Cocktail createForInit(String name,String description,String alcoholic,String category,String imgUrl,String glass){
+    public static Cocktail createForInit(String name,String description,Alcoholic alcoholic,String category,String imgUrl,String glass){
         return Cocktail.builder()
                 .name(name)
                 .description(description)
@@ -51,7 +52,7 @@ public class Cocktail {
     }
 
     // 사용자가 추가
-    public static Cocktail create(String name,String description,String alcoholic,String category,String imgUrl,String glass,Member member){
+    public static Cocktail create(String name,String description,Alcoholic alcoholic,String category,String imgUrl,String glass,Member member){
         Cocktail cocktail = createForInit(name, description, alcoholic, category, imgUrl, glass);
         cocktail.member = member;
         return cocktail;
