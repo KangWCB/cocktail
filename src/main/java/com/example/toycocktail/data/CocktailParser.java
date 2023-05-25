@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class CocktailParser {
     private final LiquidRepository liquidRepository;
     private final InnerLiquidRepository innerLiquidRepository;
 
+    @Transactional
     public void read() throws IOException, CsvException {
         InputStream in = getClass().getResourceAsStream("/data.csv");
         InputStreamReader reader = new InputStreamReader(in, StandardCharsets.UTF_8);

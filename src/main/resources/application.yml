@@ -7,12 +7,16 @@ spring:
     password: 1234
   jpa:
     hibernate:
-      ddl-auto: update # 한번 실행 이후 무조건 update로 수정
+      ddl-auto: create # 한번 실행 이후 무조건 update로 수정
 
 decorator:
   datasource:
     p6spy:
       enable-logging: true #운영환경에서는 false
+
+logging:
+  level:
+    root: info
 ---
 spring:
   config:
