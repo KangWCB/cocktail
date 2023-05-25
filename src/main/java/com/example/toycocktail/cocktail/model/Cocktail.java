@@ -32,17 +32,28 @@ public class Cocktail {
 
     private String glass;
 
+    private int views;
+
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public Cocktail initData(String name,String description,String alcoholic,String category,String imgUrl,String glass){
+    // 초기데이터
+    public static Cocktail createForInit(String name,String description,String alcoholic,String category,String imgUrl,String glass){
         return Cocktail.builder()
                 .name(name)
                 .description(description)
                 .alcoholic(alcoholic)
                 .category(category)
                 .imgUrl(imgUrl)
+                .views(0)
                 .glass(glass).build();
+    }
+
+    // 사용자가 추가
+    public static Cocktail create(String name,String description,String alcoholic,String category,String imgUrl,String glass,Member member){
+        Cocktail cocktail = createForInit(name, description, alcoholic, category, imgUrl, glass);
+        cocktail.member = member;
+        return cocktail;
     }
 }

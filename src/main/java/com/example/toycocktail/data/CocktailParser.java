@@ -78,14 +78,12 @@ public class CocktailParser {
             // Cocktail check
             Cocktail cocktail = cocktailRepository.findByName(cocktailData.getName())
                     .orElseGet(() -> cocktailRepository.save(
-                            Cocktail.builder()
-                                    .name(cocktailData.getName())
-                                    .description(cocktailData.getDescription())
-                                    .alcoholic(cocktailData.getAlcoholic())
-                                    .category(cocktailData.getCategory())
-                                    .imgUrl(cocktailData.getImgUrl())
-                                    .glass(cocktailData.getGlass())
-                                    .build()
+                            Cocktail.createForInit(cocktailData.getName(),
+                                    cocktailData.getDescription(),
+                                    cocktailData.getAlcoholic(),
+                                    cocktailData.getCategory(),
+                                    cocktailData.getImgUrl(),
+                                    cocktailData.getGlass())
                     ));
 
             for(String liquidName: liquidMap.keySet()) {
