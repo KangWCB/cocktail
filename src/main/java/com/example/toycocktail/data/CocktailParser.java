@@ -62,7 +62,6 @@ public class CocktailParser {
         Member user = Member.builder()
                 .email("cocktail@naver.com")
                 .password("1234")
-                .role("USER")
                 .intro("안녕하세요.").build();
         memberRepository.save(user);
     } 

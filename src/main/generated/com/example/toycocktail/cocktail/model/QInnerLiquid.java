@@ -22,7 +22,7 @@ public class QInnerLiquid extends EntityPathBase<InnerLiquid> {
 
     public static final QInnerLiquid innerLiquid = new QInnerLiquid("innerLiquid");
 
-    public final NumberPath<Integer> amount = createNumber("amount", Integer.class);
+    public final StringPath amount = createString("amount");
 
     public final QCocktail cocktail;
 

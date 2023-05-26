@@ -21,7 +21,7 @@ public class QLiquid extends EntityPathBase<Liquid> {
 
     public final NumberPath<Float> alcoholLevel = createNumber("alcoholLevel", Float.class);
 
-    public final StringPath category = createString("category");
+    public final EnumPath<Category> category = createEnum("category", Category.class);
 
     public final StringPath company = createString("company");
 
@@ -32,6 +32,8 @@ public class QLiquid extends EntityPathBase<Liquid> {
     public final StringPath name = createString("name");
 
     public final NumberPath<Integer> price = createNumber("price", Integer.class);
+
+    public final NumberPath<Integer> views = createNumber("views", Integer.class);
 
     public QLiquid(String variable) {
         super(Liquid.class, forVariable(variable));
