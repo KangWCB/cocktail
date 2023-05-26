@@ -17,7 +17,7 @@ public class ErrorControllerAdvice {
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     protected ResponseEntity<ErrorResponse> handleException(Exception e) {
-        ErrorResponse response = ErrorResponse.of(ErrorCode.EXPIRED_CODE);
+        ErrorResponse response = ErrorResponse.of(ErrorCode.INVALID_CODE);
         response.setDetail(e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
@@ -29,7 +29,6 @@ public class ErrorControllerAdvice {
         response.setDetail(e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
     }
-
 
 //    /* Custom Error Handler */
 //    @ExceptionHandler(value = CustomException.class)
