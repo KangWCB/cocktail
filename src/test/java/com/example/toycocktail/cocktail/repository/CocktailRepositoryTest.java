@@ -97,7 +97,7 @@ class CocktailRepositoryTest {
     @Test
     void findByCocktailWithMember(){
         Member member = memberRepository.findById(1L).orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다.")); // 슈퍼계정
-        Cocktail cocktail = repository.findById(35L).orElseThrow(() -> new IllegalArgumentException("해당 술이 없습니다."));// Absolut Evergreen
+        Cocktail cocktail = repository.findById(35L).orElseThrow(() -> new IllegalArgumentException("해당 술이 없습니다."));// Absolut Sex
         log.info("cocktail name = {}",cocktail.getName());
         Likes like = Likes.builder()
                 .member(member)
