@@ -4,6 +4,8 @@ import com.example.toycocktail.cocktail.dto.SearchCond;
 import com.example.toycocktail.cocktail.model.Alcoholic;
 import com.example.toycocktail.cocktail.model.Cocktail;
 import com.example.toycocktail.cocktail.model.QCocktail;
+import com.example.toycocktail.like.model.QLikes;
+import com.example.toycocktail.member.model.QMember;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -25,6 +27,8 @@ public class CocktailRepositoryImpl implements CocktailRepositoryCustom{
     private final JPAQueryFactory queryFactory;
 
     QCocktail qCocktail = QCocktail.cocktail;
+    QMember qmember = QMember.member;
+    QLikes qlikes = QLikes.likes;
 
     @Override
     public Page<Cocktail> findBySearchCond(SearchCond searchCond, Pageable pageable) {
@@ -36,6 +40,21 @@ public class CocktailRepositoryImpl implements CocktailRepositoryCustom{
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
+        return new PageImpl<>(result,pageable, result.size());
+    }
+
+    @Override
+    public Page<Cocktail> findBySearchCond(SearchCond searchCond, Pageable pageable, Long memberId) {
+        List<Cocktail> result = queryFactory.select(qCocktail)
+                .from(qCocktail)
+                .leftJoin(qCocktail.likesList,qlikes).on(qlikes.member.id.eq(memberId))
+                .where(containName(searchCond.getName()),
+                        isAlcoholic(searchCond.getIsAlcoholic()))
+                .orderBy(qlikes.member.id.desc().nullsLast(),qCocktail.views.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
         return new PageImpl<>(result,pageable, result.size());
     }
 
