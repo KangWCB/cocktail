@@ -23,6 +23,8 @@ public class Liquid {
 
     private int price;
 
+    private int views;
+
     @Enumerated(EnumType.STRING)
     private Category category;
 }
