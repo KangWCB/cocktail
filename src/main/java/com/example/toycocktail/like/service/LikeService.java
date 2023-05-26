@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -20,7 +22,7 @@ public class LikeService {
 
     @Transactional
     public Long likeCocktail(Member member, Long cocktailId){
-        Cocktail cocktail = cocktailRepository.findById(cocktailId).orElseThrow(() -> new IllegalArgumentException(CocktailConstant.NOT_FOUND_COCKTAIL));
+        Cocktail cocktail = cocktailRepository.findById(cocktailId).orElseThrow(() -> new NoSuchElementException(CocktailConstant.NOT_FOUND_COCKTAIL));
         Likes like = Likes.builder()
                 .cocktail(cocktail)
                 .member(member)
