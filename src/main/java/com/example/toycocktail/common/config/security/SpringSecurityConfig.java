@@ -41,7 +41,6 @@ public class SpringSecurityConfig {
     public SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception{
         http
                 .csrf((csrf) -> csrf.disable())
-                .cors((cors) -> cors.disable())
                 .httpBasic((httpBasic) -> httpBasic.disable())
                 .sessionManagement((sessionManagement) -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request

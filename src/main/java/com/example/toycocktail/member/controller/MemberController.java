@@ -2,15 +2,14 @@ package com.example.toycocktail.member.controller;
 
 
 import com.example.toycocktail.common.config.security.jwt.JwtTokenProvider;
+import com.example.toycocktail.common.config.security.jwt.dto.TokenInfo;
 import com.example.toycocktail.member.dto.MemberFormDto;
 import com.example.toycocktail.member.dto.MemberLoginDto;
 import com.example.toycocktail.member.model.Member;
 import com.example.toycocktail.member.repository.MemberRepository;
 import com.example.toycocktail.member.service.MemberService;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +24,7 @@ public class MemberController {
     private final MemberRepository memberRepository;
     private final JwtTokenProvider jwtTokenProvider;
     @PostMapping("/login")
-    public String login(@RequestBody MemberLoginDto memberLoginDto) {
+    public TokenInfo login(@RequestBody MemberLoginDto memberLoginDto) {
         log.info("call login: {} {}",memberLoginDto.getEmail(),memberLoginDto.getPassword());
         Member member = memberRepository.findByEmail(memberLoginDto.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("존재하지 않는 이메일 입니다.")); // 나중에 공통 exception 으로 변경해야함
@@ -41,6 +40,11 @@ public class MemberController {
     @PostMapping("/join")
     public void join(@RequestBody MemberFormDto memberFormDto) {
         memberService.join(Member.createMember(memberFormDto, passwordEncoder));
+    }
+
+    @PostMapping("/test")
+    public String test() {
+        //return memberRepository.
     }
 
 }

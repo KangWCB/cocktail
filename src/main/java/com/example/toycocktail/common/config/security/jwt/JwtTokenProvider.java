@@ -1,9 +1,8 @@
 package com.example.toycocktail.common.config.security.jwt;
 
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.example.toycocktail.common.config.security.jwt.dto.TokenInfo;
+import io.jsonwebtoken.*;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,11 +34,12 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String createToken(String userId) {
+    public TokenInfo createToken(String userId) {
         log.info("secretkey: {}",secretKey);
         Claims claims = Jwts.claims().setSubject(userId); // 유니크한 값 설정
         Date now = new Date();
         Date accessTokenValidity = new Date(now.getTime() + accessTokenValidTime);
+        Date refreshTokenValidity = new Date(now.getTime() + refreshTokenValidTime);
 
         String accessToken = Jwts.builder()
                 .setClaims(claims)
@@ -48,12 +48,37 @@ public class JwtTokenProvider {
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
 
-        return accessToken;
+        String refreshToken = Jwts.builder()
+                .setExpiration(refreshTokenValidity)
+                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .compact();
+
+        return TokenInfo.builder()
+                .grantType("Bearer")
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .build();
     }
 
     public Authentication getAuthentication(String token){
         UserDetails userDetails = userDetailsService.loadUserByUsername(getUsername(token));
         return new UsernamePasswordAuthenticationToken(userDetails,"",userDetails.getAuthorities());
+    }
+
+    public boolean validateToken(String token){
+        try {
+            Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
+            return true;
+        } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
+            log.info("잘못된 JWT 서명입니다.");
+        } catch (ExpiredJwtException e) {
+            log.info("만료된 JWT 토큰입니다.");
+        } catch (UnsupportedJwtException e) {
+            log.info("지원되지 않는 JWT 토큰입니다.");
+        } catch (IllegalArgumentException e) {
+            log.info("JWT 토큰이 잘못되었습니다.");
+        }
+        return false;
     }
 
     public String getUsername(String token) {
