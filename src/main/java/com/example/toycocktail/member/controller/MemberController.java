@@ -5,11 +5,14 @@ import com.example.toycocktail.common.config.security.jwt.JwtTokenProvider;
 import com.example.toycocktail.common.config.security.jwt.dto.TokenInfo;
 import com.example.toycocktail.member.dto.MemberFormDto;
 import com.example.toycocktail.member.dto.MemberLoginDto;
+import com.example.toycocktail.member.dto.TokenInfoDto;
 import com.example.toycocktail.member.model.Member;
 import com.example.toycocktail.member.repository.MemberRepository;
 import com.example.toycocktail.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -42,9 +45,12 @@ public class MemberController {
         memberService.join(Member.createMember(memberFormDto, passwordEncoder));
     }
 
-    @PostMapping("/test")
-    public String test() {
-        //return memberRepository.
+    @PostMapping("/reissue")
+    public ResponseEntity reissue(@RequestBody TokenInfoDto tokenInfoDto) {
+        String newAccessToken = jwtTokenProvider.reissueToken(tokenInfoDto.getAccessToken(), tokenInfoDto.getRefreshToken());
+        if (newAccessToken == null)
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(newAccessToken, HttpStatus.OK);
     }
 
 }

@@ -10,6 +10,11 @@ spring:
       ddl-auto: update # 한번 실행 이후 무조건 update로 수정
   jwt:
     secret: ${JWT_SECRET_KEY}
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
 decorator:
   datasource:
     p6spy:

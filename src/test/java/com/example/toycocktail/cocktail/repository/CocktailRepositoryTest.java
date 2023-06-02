@@ -1,5 +1,6 @@
 package com.example.toycocktail.cocktail.repository;
 
+import com.example.toycocktail.cocktail.model.Alcoholic;
 import com.example.toycocktail.cocktail.model.Cocktail;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
@@ -23,7 +24,7 @@ class CocktailRepositoryTest {
         Cocktail cocktail = Cocktail.builder()
                 .name("잭콕")
                 .glass("롱")
-                .alcoholic("알코올").build();
+                .alcoholic(Alcoholic.valueOf("알코올")).build();
         repository.save(cocktail);
 
         em.flush();
