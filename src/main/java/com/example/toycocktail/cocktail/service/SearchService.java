@@ -35,4 +35,19 @@ public class SearchService {
         return null;
     }
 
+    /**
+     * 기본은 무조건 Cocktail
+     */
+    public Page<SearchResponse> search(SearchCond searchCond, Pageable pageable,Long memberId){
+        String type = searchCond.getDrinkTypeName();
+        if (type.equals("Cocktail")){
+            Page<Cocktail> findCocktailList = cocktailRepository.findBySearchCond(searchCond, pageable, memberId);
+            return SearchResponse.cocktailToDtoList(findCocktailList);
+        }
+//        if (type.equals("Liquid")){
+//            return null; // 작성 예정
+//        }
+        return null;
+    }
+
 }

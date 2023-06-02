@@ -7,6 +7,8 @@ import com.example.toycocktail.cocktail.model.Liquid;
 import com.example.toycocktail.cocktail.repository.CocktailRepository;
 import com.example.toycocktail.cocktail.repository.InnerLiquidRepository;
 import com.example.toycocktail.cocktail.repository.LiquidRepository;
+import com.example.toycocktail.member.model.Member;
+import com.example.toycocktail.member.repository.MemberRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBeanBuilder;
 import jakarta.annotation.PostConstruct;
@@ -39,15 +41,30 @@ public class CocktailParser {
     private final InnerLiquidRepository innerLiquidRepository;
     private final String resource = "/data.csv";
 
+    private final MemberRepository memberRepository;
+
     @PostConstruct
     public void initData(){
         try{
             read();
+            createSuperMember();
         } catch (Exception e) {
             log.error(e.getMessage());
         }
 
     }
+
+    /**
+     * 임시 슈퍼 계정 생성
+     */
+    @Transactional
+    public void createSuperMember(){
+        Member user = Member.builder()
+                .email("cocktail@naver.com")
+                .password("1234")
+                .intro("안녕하세요.").build();
+        memberRepository.save(user);
+    } 
 
     @Transactional(rollbackFor = Exception.class)
     public void read() throws Exception {

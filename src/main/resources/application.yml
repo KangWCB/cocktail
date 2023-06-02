@@ -8,6 +8,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update # 한번 실행 이후 무조건 update로 수정
+    properties:
+      hibernate:
+        default_batch_fetch_size: 1000
 
 decorator:
   datasource:

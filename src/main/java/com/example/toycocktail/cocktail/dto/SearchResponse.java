@@ -2,6 +2,7 @@ package com.example.toycocktail.cocktail.dto;
 
 import com.example.toycocktail.cocktail.model.Cocktail;
 import com.example.toycocktail.cocktail.model.Liquid;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

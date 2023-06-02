@@ -22,15 +22,25 @@ public class QCocktail extends EntityPathBase<Cocktail> {
 
     public static final QCocktail cocktail = new QCocktail("cocktail");
 
+    public final EnumPath<Alcoholic> alcoholic = createEnum("alcoholic", Alcoholic.class);
+
+    public final StringPath category = createString("category");
+
     public final StringPath description = createString("description");
 
+    public final StringPath glass = createString("glass");
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    public final StringPath imgUrl = createString("imgUrl");
+
+    public final ListPath<com.example.toycocktail.like.model.Likes, com.example.toycocktail.like.model.QLikes> likesList = this.<com.example.toycocktail.like.model.Likes, com.example.toycocktail.like.model.QLikes>createList("likesList", com.example.toycocktail.like.model.Likes.class, com.example.toycocktail.like.model.QLikes.class, PathInits.DIRECT2);
 
     public final com.example.toycocktail.member.model.QMember member;
 
     public final StringPath name = createString("name");
 
-    public final StringPath type = createString("type");
+    public final NumberPath<Integer> views = createNumber("views", Integer.class);
 
     public QCocktail(String variable) {
         this(Cocktail.class, forVariable(variable), INITS);
