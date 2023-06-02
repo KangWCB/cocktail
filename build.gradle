@@ -35,25 +35,16 @@ dependencies {
 
 	testCompileOnly 'org.projectlombok:lombok:1.18.20' // 테스트 의존성 추가
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.20' // 테스트 의존성 추가
-
 	// opencsv
 	implementation 'com.opencsv:opencsv:5.5'
-
 	// spring security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-
 	// spring validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-
 	// redis
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-
 	// email
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
-
-	// lombok setting
-	annotationProcessor('org.projectlombok:lombok')
-	testAnnotationProcessor('org.projectlombok:lombok')
 
 	// opencsv
 	implementation 'com.opencsv:opencsv:5.5'
