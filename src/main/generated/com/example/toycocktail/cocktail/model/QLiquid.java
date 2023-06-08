@@ -33,6 +33,8 @@ public class QLiquid extends EntityPathBase<Liquid> {
 
     public final NumberPath<Integer> price = createNumber("price", Integer.class);
 
+    public final NumberPath<Integer> views = createNumber("views", Integer.class);
+
     public QLiquid(String variable) {
         super(Liquid.class, forVariable(variable));
     }

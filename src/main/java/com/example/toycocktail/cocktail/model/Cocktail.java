@@ -1,10 +1,14 @@
 package com.example.toycocktail.cocktail.model;
 
 
+import com.example.toycocktail.like.model.Likes;
 import com.example.toycocktail.member.model.Member;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Length;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static jakarta.persistence.FetchType.LAZY;
 
@@ -38,6 +42,9 @@ public class Cocktail {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToMany(mappedBy = "cocktail", cascade = CascadeType.ALL)
+    private List<Likes> likesList = new ArrayList<>();
 
     // 초기데이터
     public static Cocktail createForInit(String name,String description,Alcoholic alcoholic,String category,String imgUrl,String glass){
