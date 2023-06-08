@@ -49,6 +49,13 @@ dependencies {
 	// opencsv
 	implementation 'com.opencsv:opencsv:5.5'
 
+	// jwt
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	// redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 }
 
 tasks.named('test') {
@@ -72,3 +79,4 @@ sourceSets {
 clean {
 	delete file(generated)
 }
+
