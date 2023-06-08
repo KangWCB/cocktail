@@ -24,13 +24,13 @@ public class SearchController {
     private final SearchService searchService;
 
     @GetMapping
-    public Page<SearchResponse> search(@RequestBody SearchCond searchCond, @AuthenticationPrincipal Optional<Member> member,
+    public Page<SearchResponse> search(@RequestBody SearchCond searchCond, @CurrentUser Member member,
                                        Pageable pageable){
         Page<SearchResponse> result;
-        if (member.isEmpty()) {
+        if (member == null) {
             result = searchService.search(searchCond, pageable);
         }else{
-            result = searchService.search(searchCond, pageable,member.get().getId());
+            result = searchService.search(searchCond, pageable,member.getId());
         }
         return result;
     }

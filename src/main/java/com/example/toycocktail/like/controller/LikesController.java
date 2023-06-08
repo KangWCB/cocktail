@@ -20,13 +20,13 @@ public class LikesController {
     private final LikeService likeService;
 
     @PostMapping
-    public Long likeCocktail(@RequestParam Long cocktailId, @AuthenticationPrincipal Member member){
+    public Long likeCocktail(@RequestParam Long cocktailId, @CurrentUser Member member){
         Long likeId = likeService.likeCocktail(member, cocktailId);
         return likeId;
     }
 
     @GetMapping("/list")
-    public Response getLikeCocktail(@AuthenticationPrincipal Member member){
+    public Response getLikeCocktail(@CurrentUser Member member){
         List<LikesCocktailResponse> likesCocktailList = likeService.getLikesCocktailList(member);
         CountAndData result = new CountAndData(likesCocktailList.size(), likesCocktailList);
         return new Response<>(200,result);
