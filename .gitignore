@@ -39,10 +39,5 @@ out/
 ### VS Code ###
 .vscode/
 
-<<<<<<< HEAD
 ### Mac OS ###
 .DS_Store
-=======
-### querydsl folder ###
-/src/main/generated/
->>>>>>> 23a46f116becc4088a28265a7db556a50c4c8867
