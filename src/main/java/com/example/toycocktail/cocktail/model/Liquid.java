@@ -1,18 +1,13 @@
 package com.example.toycocktail.cocktail.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@Builder
 @Getter
 public class Liquid {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,13 +15,16 @@ public class Liquid {
 
     private String name;
 
-    private int alcoholLevel; // enum?
+    private float alcoholLevel;
 
     private String description;
 
     private String company;
 
-    private Long price;
+    private int price;
 
-    private String type; // enum?
+    private int views;
+
+    @Enumerated(EnumType.STRING)
+    private Category category;
 }

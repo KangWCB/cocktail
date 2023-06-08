@@ -1,18 +1,16 @@
 package com.example.toycocktail.member.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import com.example.toycocktail.member.constant.Role;
+import com.example.toycocktail.member.dto.MemberFormDto;
+import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
-@NoArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
 @Getter
 public class Member {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +24,16 @@ public class Member {
 
     private String intro;
 
-    private String role; // enum?
+    @Enumerated(EnumType.STRING)
+    private Role role; // enum???
+
+    public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
+        Member member = Member.builder()
+                .email(memberFormDto.getEmail())
+                .name(memberFormDto.getName())
+                .password(passwordEncoder.encode(memberFormDto.getPassword()))
+                .role(Role.USER)
+                .build();
+        return member;
+    }
 }
