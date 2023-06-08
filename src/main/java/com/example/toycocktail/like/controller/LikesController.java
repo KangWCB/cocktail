@@ -4,6 +4,7 @@ import com.example.toycocktail.common.dto.Response;
 import com.example.toycocktail.like.dto.LikesCocktailResponse;
 import com.example.toycocktail.like.service.LikeService;
 import com.example.toycocktail.member.model.Member;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,6 +27,14 @@ public class LikesController {
 
     @GetMapping("/list")
     public Response getLikeCocktail(@AuthenticationPrincipal Member member){
-        return new Response<>(200,likeService.getLikesCocktailList(member));
+        List<LikesCocktailResponse> likesCocktailList = likeService.getLikesCocktailList(member);
+        CountAndData result = new CountAndData(likesCocktailList.size(), likesCocktailList);
+        return new Response<>(200,result);
+    }
+
+    @AllArgsConstructor
+    private class CountAndData{
+        private int count;
+        private List data;
     }
 }
