@@ -3,6 +3,7 @@ package com.example.toycocktail.cocktail.controller;
 import com.example.toycocktail.cocktail.dto.SearchCond;
 import com.example.toycocktail.cocktail.dto.SearchResponse;
 import com.example.toycocktail.cocktail.service.SearchService;
+import com.example.toycocktail.common.config.security.CurrentUser;
 import com.example.toycocktail.member.model.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

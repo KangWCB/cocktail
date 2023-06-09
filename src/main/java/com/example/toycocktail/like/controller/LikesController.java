@@ -1,5 +1,6 @@
 package com.example.toycocktail.like.controller;
 
+import com.example.toycocktail.common.config.security.CurrentUser;
 import com.example.toycocktail.common.dto.Response;
 import com.example.toycocktail.like.dto.LikesCocktailResponse;
 import com.example.toycocktail.like.service.LikeService;
