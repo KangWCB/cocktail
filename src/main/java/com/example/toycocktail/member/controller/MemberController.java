@@ -1,6 +1,7 @@
 package com.example.toycocktail.member.controller;
 
 
+import com.example.toycocktail.common.config.security.CurrentUser;
 import com.example.toycocktail.common.config.security.jwt.JwtTokenProvider;
 import com.example.toycocktail.common.config.security.jwt.dto.TokenInfo;
 import com.example.toycocktail.member.dto.MemberFormDto;
@@ -51,6 +52,12 @@ public class MemberController {
         if (newAccessToken == null)
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(newAccessToken, HttpStatus.OK);
+    }
+
+    @GetMapping("/test")
+    public void test(@CurrentUser Member member)
+    {
+        log.info("name: {}",member.getName());
     }
 
 }
